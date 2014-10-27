@@ -1,22 +1,24 @@
+import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-
-public class Imprimir {
-
-public static void main(String arg[]){
-
- PrintWriter pw = new PrintWriter(System.out, true);
-
- pw.println("Imprime una cadena de texto");
-
- int i = 15;
-
- pw.println("Imprime un entero " + i);
-
- double d = 6.0;
-
- pw.println("Imprime un double " + d);
-
- }
-
+import java.util.Scanner;
+public class Prueba {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        PrintWriter salida = null;
+        try {
+            salida = new PrintWriter("/home/zubiri/Escritorio/datos.txt");
+            String cadena;
+            System.out.println("Introduce texto. Para acabar introduce la cadena FIN:");
+            cadena = sc.nextLine();
+            while (!cadena.equalsIgnoreCase("FIN")) {
+                salida.println(cadena);
+                cadena = sc.nextLine();
+            }
+            salida.flush();
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            salida.close();
+        }
+    }
 }
-
